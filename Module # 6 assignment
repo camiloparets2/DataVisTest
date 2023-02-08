@@ -1,0 +1,40 @@
+library(ggplot2)
+
+# Load the mtcars dataset
+data("mtcars")
+
+# Create a bar plot
+ggplot(mtcars, aes(x = factor(cyl))) +
+  geom_bar(aes(y = mean(mpg)), stat = "identity", fill = "#0072B2", color = "black") +
+  xlab("Number of Cylinders") +
+  ylab("Average Miles per Gallon") +
+  ggtitle("Average MPG by Number of Cylinders") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, hjust = 1, size = 12),
+        axis.text.y = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        legend.position = "none")
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_jitter(width = 0.1, color = "#0072B2", alpha = 0.6) +
+  xlab("Number of Cylinders") +
+  ylab("Miles per Gallon") +
+  ggtitle("Dot Plot of MPG by Number of Cylinders") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, hjust = 1, size = 12),
+        axis.text.y = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        legend.position = "none")
+
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_violin(fill = "#0072B2", color = "#0072B2", alpha = 0.6) +
+  xlab("Number of Cylinders") +
+  ylab("Miles per Gallon") +
+  ggtitle("Violin Plot of MPG by Number of Cylinders") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, hjust = 1, size = 12),
+        axis.text.y = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        legend.position = "none")
