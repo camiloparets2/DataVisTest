@@ -1,0 +1,24 @@
+library(ggplot2)
+library(gridExtra)
+
+data(mtcars)
+
+plots <- list()
+
+for (i in c(4, 6, 8)) {
+  plots[[i]] <- ggplot(mtcars[mtcars$cyl == i,], aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
+    geom_boxplot() +
+    scale_fill_manual(values = c("dodgerblue", "forestgreen", "firebrick")) +
+    labs(title = paste("Number of Cylinders:", i)) +
+    theme_bw()
+}
+
+grid.arrange(grobs = plots, ncol = 3)
+
+library(ggplot2)
+
+ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) + 
+  geom_violin() +
+  scale_fill_discrete(name = "Cylinders") +
+  xlab("Number of cylinders") +
+  ylab("Miles per gallon")
