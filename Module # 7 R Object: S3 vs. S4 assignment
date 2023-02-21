@@ -1,0 +1,16 @@
+data(iris)
+summary.iris <- function(x, ...) {
+  cat("Custom message: ")
+  summary(x, ...)
+}
+summary(iris)
+install.packages("methods")
+library(methods)
+setClass("irisClass", slots = list(data = "data.frame"))
+irisObj <- new("irisClass", data = iris)
+setGeneric("summary", function(object, ...) standardGeneric("summary"))
+setMethod("summary", "irisClass", function(object, ...) {
+  cat("Custom message: ")
+  summary(object@data, ...)
+})
+summary(irisObj)
