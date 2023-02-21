@@ -31,3 +31,4 @@ setMethod("describe_car_s4", "Car", function(car) {
 
 # test the S4 method
 describe_car_s4(my_s4_car)
+
