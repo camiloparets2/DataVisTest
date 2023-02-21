@@ -1,16 +1,33 @@
-data(iris)
-summary.iris <- function(x, ...) {
-  cat("Custom message: ")
-  summary(x, ...)
+# create an S3 object
+my_car <- list(make = "Ford", model = "Mustang", year = 2015)
+
+# define the generic function
+setGeneric("describe_car", function(car) standardGeneric("describe_car"))
+
+# define the S3 method
+describe_car.default <- function(car) {
+  cat("Make: ", car$make, "\n")
+  cat("Model: ", car$model, "\n")
+  cat("Year: ", car$year, "\n")
 }
-summary(iris)
-install.packages("methods")
-library(methods)
-setClass("irisClass", slots = list(data = "data.frame"))
-irisObj <- new("irisClass", data = iris)
-setGeneric("summary", function(object, ...) standardGeneric("summary"))
-setMethod("summary", "irisClass", function(object, ...) {
-  cat("Custom message: ")
-  summary(object@data, ...)
+
+# test the S3 method
+describe_car(my_car)
+# define the S4 class
+setClass("Car", slots = c(make = "character", model = "character", year = "numeric"))
+
+# create an S4 object
+my_s4_car <- new("Car", make = "Ford", model = "Mustang", year = 2015)
+
+# define the generic function
+setGeneric("describe_car_s4", function(car) standardGeneric("describe_car_s4"))
+
+# define the S4 method
+setMethod("describe_car_s4", "Car", function(car) {
+  cat("Make: ", car@make, "\n")
+  cat("Model: ", car@model, "\n")
+  cat("Year: ", car@year, "\n")
 })
-summary(irisObj)
+
+# test the S4 method
+describe_car_s4(my_s4_car)
