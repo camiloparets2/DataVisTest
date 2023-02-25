@@ -1,0 +1,26 @@
+library(ggplot2)
+data(diamonds)
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Carat Weight", y = "Price") +
+  ggtitle("Relationship between Carat Weight and Price of Diamonds") +
+  theme(plot.title = element_text(hjust = 0.5))
+# scatter plot of depth and price with carat weight
+p1 <- ggplot(diamonds, aes(x = depth, y = price, color = carat)) +
+  geom_point(alpha = 0.2) +
+  labs(x = "Depth", y = "Price") +
+  ggtitle("Relationship between Depth and Price with Carat Weight") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+# scatter plot of depth and price without carat weight
+p2 <- ggplot(diamonds, aes(x = depth, y = price)) +
+  geom_point(alpha = 0.2) +
+  labs(x = "Depth", y = "Price") +
+  ggtitle(" Depth and Price without Carat Weight") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+# arrange the plots using grid
+library(gridExtra)
+
+grid.arrange(p1, p2, ncol = 2)
